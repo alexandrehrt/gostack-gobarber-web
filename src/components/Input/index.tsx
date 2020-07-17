@@ -22,6 +22,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
+  // Registering the component
   useEffect(() => {
     registerField({
       name: fieldName,
@@ -30,10 +31,13 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
     });
   }, [fieldName, registerField]);
 
+  // Change the color of the icon and the bord of the container
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
 
+  // Check if there is something written in the input
+  // If there is, keeps the change in the icon color
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
 

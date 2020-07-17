@@ -28,11 +28,13 @@ const SignUp: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
+  // Receive data from the Form
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({});
 
+        // Validation of the data
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'),
           email: Yup.string()
@@ -41,6 +43,7 @@ const SignUp: React.FC = () => {
           password: Yup.string().min(6, 'No mínimo 6 caracteres'),
         });
 
+        // abortEarly: force Yup to show all errors, not only the first
         await schema.validate(data, { abortEarly: false });
 
         await api.post('/users', data);

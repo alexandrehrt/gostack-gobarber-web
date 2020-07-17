@@ -23,13 +23,13 @@ export const Container = styled.div<ContainerProps>`
   & + div {
     margin-top: 8px;
   }
-
   ${(props) =>
     props.isErrored &&
     css`
       border-color: #c53030;
     `}
 
+  /* Change color when the element is focused */
   ${(props) =>
     props.isFocused &&
     css`
@@ -37,6 +37,7 @@ export const Container = styled.div<ContainerProps>`
       border-color: #ff9000;
     `}
 
+  /* Keeps the color change in the icon if there is something written */
   ${(props) =>
     props.isFilled &&
     css`

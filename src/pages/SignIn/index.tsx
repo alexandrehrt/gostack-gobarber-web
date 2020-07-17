@@ -32,6 +32,7 @@ const SignIn: React.FC = () => {
       try {
         formRef.current?.setErrors({});
 
+        // Validation of the data
         const schema = Yup.object().shape({
           email: Yup.string()
             .required('E-mail obrigatório')
@@ -39,6 +40,7 @@ const SignIn: React.FC = () => {
           password: Yup.string().required('Senha obrigatória'),
         });
 
+        // abortEarly: force Yup to show all errors, not only the first
         await schema.validate(data, { abortEarly: false });
 
         await signIn({

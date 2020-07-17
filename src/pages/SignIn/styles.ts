@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
+/** Sign in form */
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,6 +62,7 @@ export const AnimationContainer = styled.div`
     }
   }
 
+  /** Criar conta */
   > a {
     color: #ff9000;
     display: block;
@@ -81,6 +83,7 @@ export const AnimationContainer = styled.div`
   }
 `;
 
+/** Background picture on the right side of the page */
 export const Background = styled.div`
   flex: 1;
   background: url(${signInBackgroundImg}) no-repeat center;
