@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import DayPicker, { DayModifiers } from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
-import { FiPower } from 'react-icons/fi';
-import { Container, Header, HeaderContent, Profile } from './styles';
+import { FiClock, FiPower } from 'react-icons/fi';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Content,
+  Schedule,
+  NextAppointment,
+  Section,
+  Appointment,
+  Calendar,
+} from './styles';
 
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
+    if (modifiers.available) setSelectedDate(day);
+  }, []);
+
   const { signOut, user } = useAuth();
 
-  console.log(user);
   return (
     <Container>
       <Header>
@@ -29,6 +47,114 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
+
+      <Content>
+        <Schedule>
+          <h1>Horários agendados</h1>
+          <p>
+            <span>Hoje</span>
+            <span>Dia 20</span>
+            <span>Segunda-feira</span>
+          </p>
+
+          <NextAppointment>
+            <strong>Atendimento a seguir</strong>
+            <div>
+              <img
+                src="https://s2.qwant.com/thumbr/0x380/6/7/fb3e261a3113ffaaa5935dde79d4f24ad2c6377cd3c43cf20541b33c851bbb/4641831.jpg?u=https%3A%2F%2Favatars2.githubusercontent.com%2Fu%2F4641831%3Fs%3D400%26v%3D4&q=0&b=1&p=0&a=1"
+                alt="nome"
+              />
+
+              <strong>Nome do usuário</strong>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+            </div>
+          </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://s2.qwant.com/thumbr/0x380/6/7/fb3e261a3113ffaaa5935dde79d4f24ad2c6377cd3c43cf20541b33c851bbb/4641831.jpg?u=https%3A%2F%2Favatars2.githubusercontent.com%2Fu%2F4641831%3Fs%3D400%26v%3D4&q=0&b=1&p=0&a=1"
+                  alt="nome"
+                />
+
+                <strong>Nome do usuário</strong>
+              </div>
+            </Appointment>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://s2.qwant.com/thumbr/0x380/6/7/fb3e261a3113ffaaa5935dde79d4f24ad2c6377cd3c43cf20541b33c851bbb/4641831.jpg?u=https%3A%2F%2Favatars2.githubusercontent.com%2Fu%2F4641831%3Fs%3D400%26v%3D4&q=0&b=1&p=0&a=1"
+                  alt="nome"
+                />
+
+                <strong>Nome do usuário</strong>
+              </div>
+            </Appointment>
+          </Section>
+
+          <Section>
+            <strong>Tarde</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://s2.qwant.com/thumbr/0x380/6/7/fb3e261a3113ffaaa5935dde79d4f24ad2c6377cd3c43cf20541b33c851bbb/4641831.jpg?u=https%3A%2F%2Favatars2.githubusercontent.com%2Fu%2F4641831%3Fs%3D400%26v%3D4&q=0&b=1&p=0&a=1"
+                  alt="nome"
+                />
+
+                <strong>Nome do usuário</strong>
+              </div>
+            </Appointment>
+          </Section>
+        </Schedule>
+
+        <Calendar>
+          <DayPicker
+            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+            fromMonth={new Date()}
+            disabledDays={[{ daysOfWeek: [0, 6] }]}
+            modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
+            onDayClick={handleDateChange}
+            selectedDays={selectedDate}
+            months={[
+              'Janeiro',
+              'Fevereiro',
+              'Março',
+              'Abril',
+              'Maio',
+              'Junho',
+              'Julho',
+              'Agosto',
+              'Setembro',
+              'Outubro',
+              'Novembro',
+              'Dezembro',
+            ]}
+          />
+        </Calendar>
+      </Content>
     </Container>
   );
 };
