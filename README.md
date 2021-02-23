@@ -1,3 +1,6 @@
+![GoBarber](https://user-images.githubusercontent.com/62735338/108792050-2d764280-755f-11eb-8fca-e6003c0b4e08.gif)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
